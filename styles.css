@@ -25,10 +25,10 @@ body{
   scroll-padding-top:calc(var(--header-h) + 8px);
 }
 a{color:inherit;text-decoration:none}
-.container{width:min(1180px, 92vw); margin:0 auto}
+.container{width:min(1200px, 92vw); margin:0 auto}
 
-/* Header centralizado, hambúrguer no canto direito no mobile */
-header{
+/* Header principal apenas */
+body > header{
   position:sticky; top:0; z-index:50;
   backdrop-filter:saturate(1.2) blur(10px);
   background:linear-gradient(180deg, rgba(20,21,23,.9), rgba(20,21,23,.72));
@@ -104,7 +104,7 @@ header{
   aspect-ratio: 9 / 19.5;
   border-radius: 44px;
   background: linear-gradient(135deg, #0f1012, #1d1f22);
-  border:1px solid #3b3f45;
+  border:1px solid #ffffff;
   box-shadow: 0 28px 60px rgba(0,0,0,.50), inset 0 0 0 2px rgba(255,255,255,.05);
   position:relative; transform-style:preserve-3d;
   transform: rotateX(6deg) rotateY(-9deg) translateZ(0);
@@ -122,67 +122,198 @@ header{
 .screen img{width:100%; height:100%; object-fit:cover; display:block; transform: translateZ(1px)}
 .phone-caption{color:#e8e8e8; opacity:.9; margin-top:10px; font-size:13px}
 
-/* SEÇÕES - organização + espaçamentos e grids auto-fit */
-.section{padding:90px 0; border-top:1px solid var(--line)}
-.section-head{display:grid; gap:10px; margin-bottom:16px; border-bottom:1px solid var(--line-soft); padding-bottom:12px}
+/* SEÇÕES */
+.section{
+  position: relative;
+  padding: 96px 0;
+  border-top: none;
+  overflow: hidden;
+}
+.section-head{
+  display:grid; gap:10px;
+  margin-bottom:32px;
+  border-bottom:1px solid var(--line-soft);
+  padding: 0 0 20px 0;
+  background:transparent; position:static; height:auto; backdrop-filter:none;
+}
 .section-head h2{font-size: clamp(26px, 3.4vw, 38px); margin:0; letter-spacing:-.01em}
 .section-intro{color:#e3e3e3; max-width:920px; margin:0}
 
-.grid{display:grid; gap:18px; align-items:stretch; margin-top:70px}
-.grid-3{grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))}
-.grid-6{grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))}
+/* GRIDS */
+.grid{
+  display:grid;
+  gap:24px;
+  align-items:stretch;
+  justify-items:stretch;
+  grid-auto-rows: 1fr;
+  margin-top:40px;
+}
+.grid-3,
+.grid-6{
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* CARDS */
 .card{
   position:relative;
-  background: linear-gradient(180deg, var(--bg-card), #141619);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  background: linear-gradient(180deg, var(--bg-card), #111111);
   border:1px solid var(--line);
-  border-radius: 18px;
-  padding:20px;
+  border-radius:18px;
+  padding:24px;
   box-shadow: var(--shadow);
-  min-height:130px;
+  min-height:160px;
+  height:100%;
 }
 .card h3{margin:0 0 8px 0; font-size:18px}
 
-.steps{grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); list-style:none; padding:0; margin:0}
-.step{display:flex; gap:14px; align-items:flex-start; min-height:120px}
-.step-index{ width:36px; height:36px; border-radius:10px; display:grid; place-items:center; font-weight:800; background:#1f2226; border:1px solid var(--line); color:#ffffff }
-.step-body h3{margin:0 0 6px 0}
+/* PASSOS 1, 2, 3 */
+.steps{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(280px, 1fr));
+  gap:28px;
+  list-style:none;
+  padding:0;
+  margin:40px 0 0 0;
+}
+.step.card{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  min-height:160px;
+  height:100%;
+  padding:24px;
+  background: linear-gradient(180deg, var(--bg-card), #111111);
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow: var(--shadow);
+}
+.step-index{
+  width:36px; height:36px; flex:0 0 36px;
+  border-radius:10px;
+  display:grid; place-items:center;
+  font-weight:800; color:#fff;
+  background:#0f1112;
+  border:1px solid var(--line);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
+}
+.step-body{flex:1}
+.step-body h3{margin:0 0 6px 0; font-size:18px}
 .muted{color:var(--muted)}
-
-.callout{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap }
-.actions{display:flex; gap:12px}
-
-/* Rodapé */
-footer{padding:34px 0 90px; color:#e0e0e0}
-footer .row{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; border-top:1px solid var(--line); padding-top:16px}
-.footer-links .nav-link{height:36px; padding:0 12px; font-weight:600}
-
-/* Acessibilidade / motion */
-:focus-visible{outline:2px dashed #8a8f96; outline-offset:4px}
-@media (prefers-reduced-motion: reduce){ .btn,.phone{transition:none} }
-
-/* Responsivo - Tablet */
 @media (max-width: 1060px){
-  .hero{grid-template-columns:1fr; min-height: calc(100svh - var(--header-h)); padding: 18px 0 18px}
-  .hero-copy{text-align:center}
-  .cta{justify-content:center}
-  .badge-list{justify-content:center}
+  .steps{ grid-template-columns: repeat(2, minmax(240px, 1fr)); }
+}
+@media (max-width: 720px){
+  .steps{ grid-template-columns: 1fr; }
 }
 
-/* Responsivo - Mobile */
-@media (max-width: 860px){
-  .menu-toggle{display:block}
-  .links{
-    position:fixed; top:var(--header-h); right:12px; left:auto;
-    flex-direction:column; gap:10px; padding:12px;
-    background:rgba(22,24,27,.98);
-    border:1px solid var(--line); border-radius:12px;
-    transform:translateY(-140%); transition: transform .25s ease;
-    width:min(220px, 90vw);
-  }
-  .links.open{transform:translateY(0)}
-  .nav-link{width:100%; height:44px}
-  .brand{font-size:16px}
-  .hero-copy h1{font-size: clamp(24px, 7vw, 32px)}
-  .sub{font-size: clamp(14px, 4.2vw, 16px)}
-  .phone{width: min(320px, 64vw, 42vh)}
+/* ====== PATCH: Callout (E-mail) igual aos cards de passos ====== */
+
+/* largura certa dentro do container, centralizado e sem “esticar demais” */
+.callout.card{
+  width: 100%;
+  max-width: 1120px;    /* ajuste fino: igual ao grid visual dos passos */
+  margin: 0 auto;       /* centraliza dentro da seção */
+  padding: 12px 28px;   /* mesmo respiro dos cards */
+  min-height: 120px;    /* altura semelhante ao visual dos passos */
+  display: flex;
+  flex-direction: row;  /* texto centralizado verticalmente */
+  justify-content: space-between;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #141516, #0f1011);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
 }
+
+/* garante que o texto fique alinhado à esquerda (não central) */
+.callout-text{
+  flex: 1;
+  display: flex;
+  align-items: center;   /* alinha verticalmente o parágrafo */
+  text-align: left;
+}
+
+/* botão à direita, com pequeno respiro da cópia */
+.actions{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-left: 24px;     /* separa do texto */
+}
+
+/* botão com “peso” igual ao mock */
+.callout .btn{
+  min-width: 140px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #1b1d20, #111213);
+  border: 1px solid var(--line);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.04) inset,
+    0 8px 24px rgba(0,0,0,.35);
+  font-weight: 800;
+}
+
+/* ====== PATCH: Passos 1, 2, 3 – colunas e alturas consistentes ====== */
+
+.steps{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(320px, 1fr)); /* largura semelhante ao print */
+  gap: 28px;
+  list-style: none;
+  padding: 0;
+  margin: 40px 0 0 0;
+}
+
+.step.card{
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  min-height: 160px;
+  height: 100%;
+  padding: 24px;
+  background: linear-gradient(180deg, var(--bg-card), #111111);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+.step-index{
+  width: 36px; height: 36px; flex: 0 0 36px;
+  border-radius: 10px;
+  display: grid; place-items: center;
+  font-weight: 800; color: #fff;
+  background: #0f1112;
+  border: 1px solid var(--line);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
+}
+
+.step-body{ flex: 1 }
+.step-body h3{ margin: 0 0 6px 0; font-size: 18px }
+
+/* responsivo */
+@media (max-width: 1060px){
+  .steps{ grid-template-columns: repeat(2, minmax(260px, 1fr)); }
+  .callout.card{ max-width: 100%; } /* usa toda a largura do container no tablet */
+}
+@media (max-width: 720px){
+  .steps{ grid-template-columns: 1fr; }
+  .callout.card{
+    padding: 20px;
+    min-height: 0;
+  }
+  .actions{
+    width: 100%;
+    justify-content: flex-end;
+    margin-left: 0;
+    margin-top: 12px;
+  }
+}
+
+footer {
+  padding: 34px 0 60px; /* antes era 90px → aumentei */
+  color: #e0e0e0;
+}
+
