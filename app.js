@@ -181,3 +181,28 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 })();
+
+/* =========================
+   Touch "lift" em cards (mobile)
+========================= */
+(function(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pressables = document.querySelectorAll('.card, .step.card, .callout.card');
+  if(!pressables.length) return;
+
+  // aplica classe no toque (touch) e remove ao soltar
+  pressables.forEach(el=>{
+    el.addEventListener('pointerdown', (e)=>{
+      if(reduce) return;
+      // prioriza comportamento em telas sem hover (mobile) ou quando o pointer é touch
+      if (e.pointerType === 'touch' || window.matchMedia('(hover: none)').matches) {
+        el.classList.add('is-pressed');
+      }
+    }, { passive: true });
+
+    const clear = ()=> el.classList.remove('is-pressed');
+    el.addEventListener('pointerup', clear, { passive: true });
+    el.addEventListener('pointercancel', clear, { passive: true });
+    el.addEventListener('pointerleave', clear, { passive: true });
+  });
+})();
