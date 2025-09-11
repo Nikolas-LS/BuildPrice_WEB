@@ -1,5 +1,3 @@
-
-
 // Ano no rodapé
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -205,4 +203,79 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     el.addEventListener('pointercancel', clear, { passive: true });
     el.addEventListener('pointerleave', clear, { passive: true });
   });
+})();
+
+/* =========================
+   Player de vídeo (play on click, pausa fora da tela)
+========================= */
+(function(){
+  const card   = document.querySelector('.video-card');
+  const video  = document.getElementById('intro-video');
+  const overlay= card ? card.querySelector('.video-overlay') : null;
+
+  if(!card || !video || !overlay) return;
+
+  let userStarted = false; // para mostrar controles só após interação
+
+  // Reproduzir / Pausar com clique no overlay
+  async function playVideo(){
+    try{
+      await video.play();
+      card.classList.add('is-playing');
+      if (!userStarted){
+        userStarted = true;
+        // mostra controles só depois do primeiro play por gesto do usuário
+        video.setAttribute('controls', 'controls');
+      }
+    }catch(e){
+      // Se o navegador bloquear auto-play não mudo o overlay
+      // (No iOS às vezes precisa de um segundo toque)
+      console.debug('play bloqueado:', e?.message || e);
+    }
+  }
+
+  function pauseVideo(){
+    video.pause();
+    card.classList.remove('is-playing');
+  }
+
+  overlay.addEventListener('click', playVideo);
+  overlay.addEventListener('keydown', (e)=>{
+    // acessível: Enter/Space também iniciam
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      playVideo();
+    }
+  });
+
+  // Clique no próprio vídeo alterna play/pause
+  video.addEventListener('click', ()=>{
+    if(video.paused) playVideo(); else pauseVideo();
+  });
+
+  // Quando vídeo termina, volta overlay
+  video.addEventListener('ended', ()=>{
+    card.classList.remove('is-playing');
+  });
+
+  // Pausar quando sai bastante da viewport (economia e UX)
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      // rootMargin leve, threshold 0.15 lá em cima no Observer global
+      if(!en.isIntersecting && !video.paused){
+        pauseVideo();
+      }
+    });
+  }, { rootMargin: '0px 0px -20% 0px', threshold: 0.1 });
+  io.observe(card);
+
+  // Acessibilidade: overlay focável
+  overlay.setAttribute('tabindex','0');
+
+  // iOS: garantir inline
+  video.setAttribute('playsinline','');
+  video.setAttribute('webkit-playsinline','');
+
+  // Dica: se quiser iniciar SEM controles e só mostrar após play,
+  // deixe como está; se quiser sempre visíveis, remova o setAttribute acima
 })();

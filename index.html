@@ -6,6 +6,8 @@
   <title>BuildPrice</title>
   <meta name="description" content="BuildPrice: orçamentos de obras residenciais com cálculos automáticos — simples, precisos e organizados." />
   <link rel="stylesheet" href="styles.css" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/favicon_BP.png" />
 </head>
 <body>
   <header>
@@ -20,6 +22,7 @@
       <!-- navegação -->
       <nav class="links" id="main-nav" aria-label="Navegação principal">
         <a class="nav-link" href="#sobre">Sobre</a>
+        <a class="nav-link" href="#apresentacao">Apresentação</a>
         <a class="nav-link" href="#recursos">Recursos</a>
         <a class="nav-link" href="#como-funciona">Como funciona</a>
         <a class="nav-link nav-cta" href="#contato">Contato</a>
@@ -79,12 +82,45 @@
       </div>
     </section>
 
+    <!-- APRESENTAÇÃO (VÍDEO) -->
+    <section id="apresentacao" class="container section" aria-labelledby="apres-title">
+      <header class="section-head">
+        <h2 id="apres-title">Apresentação do BuildPrice</h2>
+        <p class="section-intro">Veja uma breve explicação do projeto BuildPrice em alguns minutos, por nossos desenvolvedores.</p>
+      </header>
+
+      <div class="video-card reveal">
+        <!-- Botão/overlay -->
+        <button class="video-overlay" aria-label="Reproduzir vídeo de apresentação" aria-controls="intro-video">
+          <svg class="video-play" width="72" height="72" viewBox="0 0 72 72" aria-hidden="true">
+            <circle cx="36" cy="36" r="35" stroke="white" stroke-opacity=".45" fill="rgba(0,0,0,.35)"/>
+            <polygon points="30,24 52,36 30,48" fill="#ffffff"/>
+          </svg>
+          <span class="video-tip">Clique para assistir</span>
+        </button>
+
+        <!-- Vídeo -->
+        <video
+          id="intro-video"
+          class="video-frame"
+          preload="metadata"
+          playsinline
+          webkit-playsinline
+          muted
+          poster="assets/poster_BuildPrice.jpg"
+        >
+          <source src="assets/BuildPrce.mp4" type="video/mp4"/>
+          Seu navegador não suporta vídeo HTML5. 
+          <a href="assets/BuildPrce.mp4">Baixar o vídeo</a>.
+        </video>
+      </div>
+    </section>
+
     <!-- RECURSOS -->
     <section id="recursos" class="container section" aria-labelledby="rec-title">
       <header class="section-head">
         <h2 id="rec-title">Recursos principais</h2>
       </header>
-
       <div class="grid grid-6" role="list">
         <div class="card" role="listitem">
           <h3>Cálculos automáticos</h3>

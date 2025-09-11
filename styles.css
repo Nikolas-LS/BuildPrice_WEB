@@ -457,3 +457,85 @@ footer {
       inset 0 0 0 1px rgba(255,255,255,.05);
   }
 }
+
+/* ===== Seção de Vídeo (AJUSTADO) ===== */
+.video-card{
+  position: relative;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--bg-card), #111111);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* Mantém 16:9 com container-responsivo */
+.video-card::before{
+  content: "";
+  display: block;
+  padding-top: 56.25%; /* 16:9 */
+}
+
+.video-frame{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  background: #000;
+  outline: none; border: 0;
+  border-radius: 18px;
+  /* garante zero efeitos visuais no vídeo */
+  filter: none !important;
+  -webkit-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Overlay de Play — AGORA TRANSPARENTE (sem “escurecer”) */
+.video-overlay{
+  position: absolute; inset: 0;
+  display: grid; place-items: center; gap: 10px;
+  width: 100%; height: 100%;
+  background: transparent;             /* <<< era um radial escuro */
+  border: 0; cursor: pointer;
+  color: #fff; font-weight: 700; font-size: 14px; letter-spacing: .2px;
+  transition: transform .28s cubic-bezier(.22,.61,.36,1), opacity .25s ease, background .25s ease;
+  isolation: isolate;
+}
+/* Halo suave só atrás do botão play (não escurece o vídeo todo) */
+.video-overlay::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(220px 160px at 50% 50%, rgba(0,0,0,.18), rgba(0,0,0,0) 60%);
+}
+
+.video-overlay:focus-visible{
+  outline: 2px solid rgba(255,255,255,.22);
+  outline-offset: 3px; border-radius: 14px;
+}
+.video-overlay:hover{ transform: translateY(-2px); }
+.video-play{ filter: drop-shadow(0 8px 22px rgba(0,0,0,.55)); }
+.video-tip{
+  padding: 6px 10px;
+  background: rgba(15,17,18,.55);      /* um pouco mais leve */
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+/* Quando o vídeo estiver tocando, escondemos o overlay */
+.video-card.is-playing .video-overlay{
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Controles nativos — sem blur e com fundo MUITO leve */
+.video-frame::-webkit-media-controls-enclosure{
+  background: rgba(10,11,12,.18);      /* <<< era .6 (escurecia) */
+  backdrop-filter: none !important;     /* <<< remove qualquer blur */
+  border-radius: 0 0 12px 12px;
+}
+
+/* Respeita reduzir animações */
+@media (prefers-reduced-motion: reduce){
+  .video-overlay{ transition: none !important; }
+}
