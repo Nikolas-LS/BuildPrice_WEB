@@ -1,56 +1,37 @@
-# 🌐 BuildPrice - Site Introdutório
+# BuildPrice - Landing Page
 
-Este repositório contém o **site introdutório oficial do BuildPrice**, um aplicativo desenvolvido para auxiliar profissionais e pequenos negócios da construção civil no **planejamento de materiais** e na **montagem de orçamentos de obras residenciais**.
+This repository contains the **official landing page for BuildPrice**, an app designed to help construction professionals and small businesses with **material planning** and **creating cost estimates for residential projects**.
 
-O objetivo do site é apresentar de forma simples o app, suas principais funcionalidades e links de acesso para download.
+The goal of the site is to provide a simple overview of the app, its key features, and download links.
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+## Technologies Used
 
 - **HTML5 / CSS3 / JavaScript**
-- **Framework responsivo** (ex: Bootstrap ou TailwindCSS)
-- **Responsividade mobile-first**
-- Integração com links externos (Google Play e/ou App Store)
+- **Responsive framework** (e.g., Bootstrap or TailwindCSS)
+- **Mobile-first responsiveness**
+- Integration with external links (Google Play and/or App Store)
 
 ---
 
-## 📌 Funcionalidades do Site
+## Site Features
 
-- Página inicial com apresentação do aplicativo  
-- Seção de **funcionalidades principais**  
-- Área com **capturas de tela do app**  
-- Botões de download (Google Play / App Store)  
-- Informações de **contato e suporte**
+- Home page introducing the app  
+- **Key features** section  
+- **App screenshots** area  
+- Download buttons (Google Play / App Store)  
+- **Contact and support** information
 
 ---
 
-## 📂 Estrutura do Projeto
+## Project Structure
 
 ```plaintext
-├── index.html # Página principal
-├── /assets # Imagens, ícones, logos
-├── /css # Estilos customizados
-└── /js # Scripts do site
+├── index.html # Main page
+├── /assets # Images, icons, logos
+├── /css # Custom styles
+└── /js # Site scripts
 ```
 
 ---
-
-## 🔗 Acesse o Site
-
-👉 [Clique aqui para acessar o site introdutório do BuildPrice](#)  
-*(substituir pelo link de deploy assim que publicado)*
-
----
-
-## 📱 Saiba Mais Sobre o App
-
-Confira também o repositório principal do aplicativo:  
-🔗 [BuildPrice - App Mobile](https://github.com/SEU-USUARIO/buildprice)
-
----
-
-## 📄 Licença
-
-Este projeto está sob a licença **MIT**.  
-Sinta-se à vontade para usar, modificar e contribuir!  
